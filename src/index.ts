@@ -3,8 +3,11 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from 'zod';
 // import { ErrorCode } from '@modelcontextprotocol/sdk/types';
+import dotenv from 'dotenv'
 
-function Server():McpServer {
+dotenv.config()
+
+function Server(): McpServer {
     // Create an MCP server with a simple echo tool
     const server = new McpServer({ name: 'Demo', version: '1.0.0' });
 
@@ -31,13 +34,13 @@ const app = express();
 app.use(express.json());
 
 // Set up the Streamable HTTP transport at /mcp
-app.all('/mcp', async (req:Request, res:Response) => {
+app.all('/mcp', async (req: Request, res: Response) => {
 
     try {
         const server = Server()
 
         const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
-        
+
         res.on("close", () => {
             console.log("request closed")
             transport.close()
@@ -53,7 +56,7 @@ app.all('/mcp', async (req:Request, res:Response) => {
             res.status(500).json({
                 jsonrps: '2.0',
                 error: {
-                    code:-32603, message: "internal server error"
+                    code: -32603, message: "internal server error"
                 }, id: null
             })
         }
@@ -61,5 +64,5 @@ app.all('/mcp', async (req:Request, res:Response) => {
 });
 
 app.listen(3000, () => {
-    console.log('MCP Streamable HTTP server running at http://localhost:3000');
+    console.log(`MCP Streamable HTTP server running at http://localhost:${process.env.PORT}`);
 });
