@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",         // or node18 / nodenext
+    "target": "ES2020",         // or similar modern target
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
