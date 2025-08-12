@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from 'zod';
@@ -31,7 +31,7 @@ const app = express();
 app.use(express.json());
 
 // Set up the Streamable HTTP transport at /mcp
-app.all('/mcp', async (req:Request, res:Response) => {
+app.all('/mcp', async (req, res) => {
 
     try {
         const server = Server()
