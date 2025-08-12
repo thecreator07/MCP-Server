@@ -4,7 +4,8 @@
     "target": "ES2020",         // or similar modern target
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src"
   },
   "include": ["src"]
 }
